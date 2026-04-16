@@ -24,8 +24,16 @@ Use this priority order:
 
 ### 2 — Determine the folder name
 
-- If an argument was passed to `/engram` (e.g. `/engram auth-refactor`), use that as the folder name
-- Otherwise, use the timestamp from above
+Generate a short slug that describes what this session was about — 2 to 4 lowercase words, hyphenated — then append the timestamp.
+
+Format: `<slug>-<YYYY-MM-DD-HHMMSS>`
+
+Examples:
+- `auth-refactor-2026-04-16-120603`
+- `engram-rename-2026-04-16-120603`
+- `api-rate-limit-fix-2026-04-16-120603`
+
+If an argument was passed to `/engram` (e.g. `/engram auth-refactor`), use that as the slug instead of generating one. Still append the timestamp.
 
 Create the output folder at:
 ```
@@ -67,7 +75,7 @@ Print:
 # Engram — <YYYY-MM-DD HH:MM>
 
 **Project:** <project-root>
-**Saved at:** <folder-name>
+**Saved at:** <slug>-<timestamp>
 
 ## What this session was about
 <one paragraph — goal, context, why>
