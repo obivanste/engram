@@ -34,7 +34,7 @@ bash install.sh
 /engram
 ```
 
-Saves the session. The folder name is auto-generated from the session context with a timestamp — e.g. `auth-refactor-2026-04-16-120826`.
+Saves the session. The folder name is auto-generated from the session context with a timestamp — e.g. `api-rate-limit-fix-2026-04-16-120826`.
 
 ```
 /engram <name>
@@ -55,7 +55,7 @@ read .engram/<session-name>/<session-name>.md and continue from where we left of
 For example:
 
 ```
-read .engram/auth-refactor-2026-04-16-120826/auth-refactor-2026-04-16-120826.md and continue from where we left off
+read .engram/api-rate-limit-fix-2026-04-16-120826/api-rate-limit-fix-2026-04-16-120826.md and continue from where we left off
 ```
 
 Claude reads the file and picks up from the next steps.
@@ -67,8 +67,8 @@ Claude reads the file and picks up from the next steps.
 ```
 your-project/
   .engram/
-    auth-refactor/
-      auth-refactor.md
+    api-rate-limit-fix-2026-04-16-120826/
+      api-rate-limit-fix-2026-04-16-120826.md
 ```
 
 Each engram is a single `.md` file with four sections:
