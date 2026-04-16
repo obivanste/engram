@@ -46,7 +46,13 @@ Custom slug — e.g. `/engram before-merge` → `before-merge-2026-04-16-120826/
 
 ## Resuming a session
 
-At the start of a new session:
+At the start of a new session, tell Claude to read the engram:
+
+```
+read .engram/<session-name>/<session-name>.md and continue from where we left off
+```
+
+For example:
 
 ```
 read .engram/auth-refactor-2026-04-16-120826/auth-refactor-2026-04-16-120826.md and continue from where we left off
@@ -61,8 +67,8 @@ Claude reads the file and picks up from the next steps.
 ```
 your-project/
   .engram/
-    auth-refactor-2026-04-16-120826/
-      auth-refactor-2026-04-16-120826.md
+    auth-refactor/
+      auth-refactor.md
 ```
 
 Each engram is a single `.md` file with four sections:
