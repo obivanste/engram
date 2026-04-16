@@ -26,9 +26,19 @@ Each engram is a single `.md` file with four sections:
 
 The folder name is auto-generated from the session context with a timestamp appended. `.engram/` is gitignored — it lives in the repo but is never committed.
 
+See [`examples/`](./examples) for a real engram from the session that built this tool.
+
 ---
 
 ## Install
+
+**npx (no clone needed):**
+
+```bash
+npx engram-cc
+```
+
+**or clone and run:**
 
 ```bash
 git clone https://github.com/obivanste/engram
@@ -36,7 +46,7 @@ cd engram
 bash install.sh
 ```
 
-That's it. `/engram` is now available in every Claude Code session.
+Either way, `/engram` is now available in every Claude Code session.
 
 ---
 
@@ -81,8 +91,12 @@ Engram saves to the right place automatically, in this order:
 | File | Purpose |
 |------|---------|
 | `engram.md` | The `/engram` slash command |
-| `install.sh` | Installer — copies `engram.md` to `~/.claude/commands/` |
+| `bin/engram.js` | npx installer |
+| `install.sh` | Bash installer — copies `engram.md` to `~/.claude/commands/` |
 | `engram-hook.sh` | PreCompact hook (optional, see below) |
+| `examples/` | Real engram output from the session that built this tool |
+
+---
 
 ### Optional: auto-save before compaction
 
