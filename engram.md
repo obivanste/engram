@@ -12,6 +12,7 @@ argument-hint: "[folder-name] (optional — defaults to timestamp)"
 - Git status: !`git status --short 2>/dev/null | head -20 || true`
 - Recent commits: !`git log --oneline -5 2>/dev/null || true`
 - CLAUDE.md locations: !`find . -name "CLAUDE.md" -maxdepth 4 2>/dev/null || true`
+- Engram config: !`cat ~/.engramrc 2>/dev/null || true`
 
 ## Instructions
 
@@ -20,7 +21,10 @@ argument-hint: "[folder-name] (optional — defaults to timestamp)"
 Use this priority order:
 1. Git root (from above) — most reliable
 2. Nearest directory containing `CLAUDE.md` (from above), excluding `~/.claude/`
-3. Working directory as fallback
+3. `DEFAULT_DIR` from `~/.engramrc` if present (e.g. `DEFAULT_DIR=/Users/you/Documents/engrams`)
+4. `~/Documents/.engram/` — persistent fallback, never disappears on reboot
+
+Never use `/private/tmp` or any other temp directory as the save location.
 
 ### 2 — Determine the folder name
 
@@ -29,18 +33,20 @@ Generate a short slug that describes what this session was about — 2 to 4 lowe
 Format: `<slug>-<YYYY-MM-DD-HHMMSS>`
 
 Examples:
-- `auth-refactor-2026-04-16-120603`
-- `engram-rename-2026-04-16-120603`
+- `engram-build-launch-2026-04-16-120603`
 - `api-rate-limit-fix-2026-04-16-120603`
+- `dashboard-layout-2026-04-16-120603`
 
-If an argument was passed to `/engram` (e.g. `/engram auth-refactor`), use that as the slug instead of generating one. Still append the timestamp.
+If an argument was passed to `/engram` (e.g. `/engram before-merge`), use that as the slug instead of generating one. Still append the timestamp.
 
 Create the output folder at:
 ```
 <project-root>/.engram/<folder-name>/
 ```
 
-`.engram/` is gitignored — it lives in the repo but is never committed.
+If saving to the `~/Documents/.engram/` fallback or a custom `DEFAULT_DIR`, create the folder directly inside that directory (no extra `.engram/` nesting needed).
+
+`.engram/` is gitignored when inside a project — it lives with the code but is never committed.
 
 ### 3 — Write the engram file
 
@@ -64,7 +70,7 @@ What to do from here, in priority order. Specific — not "continue the work" bu
 
 Print:
 ```
-[Engram] saved → .engram/<folder-name>/<folder-name>.md
+[Engram] saved → <full-path-to-folder>/<folder-name>.md
 ```
 
 ---

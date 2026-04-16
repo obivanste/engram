@@ -144,13 +144,22 @@ landed in the right place.
 
 ---
 
-## Project root detection
+## Save location
 
 Engram finds the right place to save automatically:
 
-1. **Git root** — most reliable
+1. **Git root** — most reliable, saves to `<git-root>/.engram/`
 2. **Directory containing `CLAUDE.md`** — next best signal
-3. **Working directory** — fallback
+3. **`DEFAULT_DIR` in `~/.engramrc`** — your chosen fallback for sessions outside a project
+4. **`~/Documents/.engram/`** — persistent default, never lost to a reboot
+
+To set a custom fallback location, create `~/.engramrc`:
+
+```bash
+DEFAULT_DIR=/Users/you/Documents/engrams
+```
+
+Engram will save there whenever there's no git repo or `CLAUDE.md` in scope.
 
 ---
 
