@@ -35,9 +35,19 @@ fi
 cp "$SCRIPT_DIR/engram.md" "$COMMANDS_DIR/engram.md"
 ok "Installed /engram → $COMMANDS_DIR/engram.md"
 
+if [ -f "$COMMANDS_DIR/recall.md" ]; then
+  cp "$COMMANDS_DIR/recall.md" "$COMMANDS_DIR/recall.md.bak"
+  dim "  Backed up existing recall.md → recall.md.bak"
+fi
+
+cp "$SCRIPT_DIR/recall.md" "$COMMANDS_DIR/recall.md"
+ok "Installed /recall → $COMMANDS_DIR/recall.md"
+
 # ── done ─────────────────────────────────────────────────────────────────────
 echo ""
-echo "All done. Type /engram in any Claude Code session to save your session."
-dim "  Engram files are saved to .engram/ inside your project (gitignored)."
-dim "  Use /engram <name> to create a named save instead of a timestamp."
+echo "All done."
+dim "  /engram — save the current session to .engram/ in your project"
+dim "  /recall  — load the latest engram back into context"
+dim ""
+dim "  Use /engram <name> or /recall <name> for named saves."
 echo ""

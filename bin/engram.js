@@ -12,8 +12,11 @@ const ok = (msg) => console.log(`${GREEN}✓${RESET} ${msg}`);
 const dim = (msg) => console.log(`${DIM}${msg}${RESET}`);
 
 const commandsDir = path.join(os.homedir(), ".claude", "commands");
-const source = path.join(__dirname, "..", "engram.md");
-const dest = path.join(commandsDir, "engram.md");
+
+const commands = [
+  { file: "engram.md", label: "/engram" },
+  { file: "recall.md", label: "/recall" },
+];
 
 console.log("");
 console.log("Engram — installer");
@@ -25,16 +28,23 @@ if (!fs.existsSync(commandsDir)) {
   ok(`Created ${commandsDir}`);
 }
 
-if (fs.existsSync(dest)) {
-  fs.copyFileSync(dest, dest + ".bak");
-  dim(`  Backed up existing engram.md → engram.md.bak`);
+for (const { file, label } of commands) {
+  const source = path.join(__dirname, "..", file);
+  const dest = path.join(commandsDir, file);
+
+  if (fs.existsSync(dest)) {
+    fs.copyFileSync(dest, dest + ".bak");
+    dim(`  Backed up existing ${file} → ${file}.bak`);
+  }
+
+  fs.copyFileSync(source, dest);
+  ok(`Installed ${label} → ${dest}`);
 }
 
-fs.copyFileSync(source, dest);
-ok(`Installed /engram → ${dest}`);
-
 console.log("");
-console.log("All done. Type /engram in any Claude Code session to save your session.");
-dim("  Engram files are saved to .engram/ inside your project (gitignored).");
-dim("  Use /engram <name> to create a named save instead of an auto-generated slug.");
+console.log("All done.");
+dim("  /engram — save the current session to .engram/ in your project");
+dim("  /recall  — load the latest engram back into context");
+dim("");
+dim("  Use /engram <name> or /recall <name> for named saves.");
 console.log("");

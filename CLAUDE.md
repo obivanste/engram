@@ -1,21 +1,28 @@
 # Engram
 
-Session memory for Claude Code. One command: `/engram`.
+Session memory for Claude Code. Two commands: `/engram` to save, `/recall` to resume.
 
-Saves the current session to a structured `.md` file inside `.engram/` in the project root — gitignored, lives with the code. On the next session, load the engram to pick up exactly where things left off.
+Saves the current session to a structured `.md` file inside `.engram/` in the project root — gitignored, lives with the code. On the next session, `/recall` loads it back into context.
 
 ## Flow
 
 ```
 /engram
-  → .engram/<timestamp>/<timestamp>.md
-  → [Engram] saved → .engram/<timestamp>/<timestamp>.md
+  → .engram/<slug-timestamp>/<slug-timestamp>.md
+  → [Engram] saved → .engram/...
+
+/recall
+  → reads latest .engram/ file
+  → [Recall] loaded → .engram/...
 ```
 
 Named saves:
 ```
 /engram auth-refactor
-  → .engram/auth-refactor/auth-refactor.md
+  → .engram/auth-refactor-<timestamp>/auth-refactor-<timestamp>.md
+
+/recall auth-refactor
+  → loads the matching engram
 ```
 
 ## Output structure
@@ -40,7 +47,8 @@ bash install.sh
 ## Files
 
 - `engram.md` — the `/engram` slash command
-- `install.sh` — installs `/engram` into Claude Code
+- `recall.md` — the `/recall` slash command
+- `install.sh` — installs both commands into Claude Code
 - `engram-hook.sh` — archived PreCompact hook
 - `CLAUDE.md` — this file
 - `notes.md` — design decisions and research

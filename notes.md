@@ -23,7 +23,7 @@ Claude Code waits for the hook to finish before compacting, so we have time to w
 User-level commands: `~/.claude/commands/<name>.md` → available as `/<name>` everywhere.  
 Project-level commands: `.claude/commands/<name>.md` → available only in that project.
 
-`recall.md` should deploy to `~/.claude/commands/recall.md` so `/recall` works globally.
+Both `engram.md` and `recall.md` deploy to `~/.claude/commands/` via `install.sh`.
 
 ## Output Location Decision
 

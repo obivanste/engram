@@ -1,8 +1,8 @@
 # Engram
 
-Session memory for Claude Code.
+Session memory for Claude Code. Two commands: `/engram` to save, `/recall` to resume.
 
-`/engram` saves a structured record of your current session to `.engram/` inside your project — so you can resume cleanly, share context with a teammate, or just not lose what you figured out.
+`/engram` saves a structured record of your current session to `.engram/` inside your project. `/recall` loads the latest one back into context — so you pick up exactly where you left off.
 
 Named after the neuroscience concept: the physical trace a memory leaves in the brain.
 
@@ -24,7 +24,7 @@ cd engram
 bash install.sh
 ```
 
-`/engram` is now available in every Claude Code session.
+`/engram` and `/recall` are now available in every Claude Code session.
 
 ---
 
@@ -46,19 +46,19 @@ Custom slug — e.g. `/engram before-merge` → `before-merge-2026-04-16-120826/
 
 ## Resuming a session
 
-At the start of a new session, tell Claude to read the engram:
+At the start of a new session, run:
 
 ```
-read .engram/<session-name>/<session-name>.md and continue from where we left off
+/recall
 ```
 
-For example:
+Loads the most recent engram and prints a summary with the top next step.
 
 ```
-read .engram/api-rate-limit-fix-2026-04-16-120826/api-rate-limit-fix-2026-04-16-120826.md and continue from where we left off
+/recall <name>
 ```
 
-Claude reads the file and picks up from the next steps.
+Load a specific engram by name — e.g. `/recall api-rate-limit` matches `api-rate-limit-fix-2026-04-16-120826`.
 
 ---
 
@@ -137,8 +137,7 @@ landed in the right place.
 
 ## Next steps
 
-- Test `/engram` from a different project to confirm git root detection in real use
-- Consider a `/pickup` companion command that reads the latest engram at session start
+- Test `/engram` and `/recall` from a different project to confirm git root detection in real use
 - Publish `engram-cc` to npm
 ```
 
@@ -163,38 +162,13 @@ Engram will save there whenever there's no git repo or `CLAUDE.md` in scope.
 
 ---
 
-## Optional: auto-save before compaction
-
-Wire up `engram-hook.sh` to fire before Claude Code compacts the context:
-
-```json
-{
-  "hooks": {
-    "PreCompact": [
-      {
-        "matcher": "",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "/path/to/engram/engram-hook.sh"
-          }
-        ]
-      }
-    ]
-  }
-}
-```
-
-Add this to `~/.claude/settings.json`. The hook reads the session transcript and writes an engram before the context is wiped.
-
----
-
 ## What's in the repo
 
 | File | Purpose |
 |------|---------|
 | `engram.md` | The `/engram` slash command |
+| `recall.md` | The `/recall` slash command |
 | `bin/engram.js` | npx installer |
 | `install.sh` | Bash installer |
-| `engram-hook.sh` | Optional PreCompact hook |
+| `engram-hook.sh` | Archived PreCompact hook (optional) |
 | `examples/` | Real engram output from the session that built this tool |
