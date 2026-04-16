@@ -1,7 +1,7 @@
 #!/bin/bash
-# TotalReClaude — installer
-# Installs the /recall command into Claude Code.
-# Recall files are saved to .recall/ inside each project repo (gitignored).
+# Engram — installer
+# Installs the /engram command into Claude Code.
+# Engram files are saved to .engram/ inside each project repo (gitignored).
 
 set -euo pipefail
 
@@ -17,28 +17,27 @@ ok()  { echo -e "${GREEN}✓${RESET} $1"; }
 dim() { echo -e "${DIM}$1${RESET}"; }
 
 echo ""
-echo "TotalReClaude — installer"
-dim "────────────────────────────"
+echo "Engram — installer"
+dim "────────────────────"
 echo ""
 
-# ── 1. ~/.claude/commands/ ───────────────────────────────────────────────────
+# ── ~/.claude/commands/ ───────────────────────────────────────────────────────
 if [ ! -d "$COMMANDS_DIR" ]; then
   mkdir -p "$COMMANDS_DIR"
   ok "Created $COMMANDS_DIR"
 fi
 
-# Back up existing recall.md if present
-if [ -f "$COMMANDS_DIR/recall.md" ]; then
-  cp "$COMMANDS_DIR/recall.md" "$COMMANDS_DIR/recall.md.bak"
-  dim "  Backed up existing recall.md → recall.md.bak"
+if [ -f "$COMMANDS_DIR/engram.md" ]; then
+  cp "$COMMANDS_DIR/engram.md" "$COMMANDS_DIR/engram.md.bak"
+  dim "  Backed up existing engram.md → engram.md.bak"
 fi
 
-cp "$SCRIPT_DIR/recall.md" "$COMMANDS_DIR/recall.md"
-ok "Installed /recall → $COMMANDS_DIR/recall.md"
+cp "$SCRIPT_DIR/engram.md" "$COMMANDS_DIR/engram.md"
+ok "Installed /engram → $COMMANDS_DIR/engram.md"
 
 # ── done ─────────────────────────────────────────────────────────────────────
 echo ""
-echo "All done. Type /recall in any Claude Code session to save your session."
-dim "  Recall files are saved to .recall/ inside your project (gitignored)."
-dim "  Use /recall <name> to create a named folder instead of a timestamp."
+echo "All done. Type /engram in any Claude Code session to save your session."
+dim "  Engram files are saved to .engram/ inside your project (gitignored)."
+dim "  Use /engram <name> to create a named save instead of a timestamp."
 echo ""

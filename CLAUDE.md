@@ -1,51 +1,46 @@
-# TotalReClaude
+# Engram
 
-Session export + clear for Claude Code. One command: `/recall`.
+Session memory for Claude Code. One command: `/engram`.
 
-Saves the current session to a dedicated folder in the active project directory, then clears the context. On the next session, Claude reads `.recall/<timestamp>/summary.md` to pick up exactly where things left off — no summarization overhead, no information loss.
+Saves the current session to a structured `.md` file inside `.engram/` in the project root — gitignored, lives with the code. On the next session, load the engram to pick up exactly where things left off.
 
 ## Flow
 
 ```
-/recall
-  → .recall/<timestamp>/summary.md   (skimmable: TL;DR, decisions, files, next steps)
-  → .recall/<timestamp>/session.md   (full record: commands, errors, reasoning, tasks)
-  → [TotalReClaude] saved → .recall/<timestamp>/
-  → /clear
+/engram
+  → .engram/<timestamp>/<timestamp>.md
+  → [Engram] saved → .engram/<timestamp>/<timestamp>.md
 ```
 
-On next session:
+Named saves:
 ```
-"load context from .recall/<timestamp>/summary.md"
-  → Claude reads the file and continues
+/engram auth-refactor
+  → .engram/auth-refactor/auth-refactor.md
 ```
-
-## Why clear instead of compact
-
-`/compact` summarizes the conversation before clearing — overhead we don't need because TotalReClaude already produces a better-structured summary. `/clear` just wipes the window. The `.recall/` folder is the source of truth.
 
 ## Output structure
 
 ```
 <project-root>/
-  .recall/
-    2026-04-16-103612/
-      2026-04-16-103612.md    ← summary at top, full session detail below
-    2026-04-15-091500/
-      2026-04-15-091500.md
+  .engram/
+    2026-04-16-120013/
+      2026-04-16-120013.md
+    auth-refactor/
+      auth-refactor.md
 ```
 
 ## Deployment
 
 ```bash
-cp recall.md ~/.claude/commands/recall.md
+git clone https://github.com/obivanste/engram
+cd engram
+bash install.sh
 ```
-
-That's it — no hook needed. `/recall` is the only entry point.
 
 ## Files
 
-- `recall.md` — the `/recall` slash command prompt
+- `engram.md` — the `/engram` slash command
+- `install.sh` — installs `/engram` into Claude Code
+- `engram-hook.sh` — archived PreCompact hook
 - `CLAUDE.md` — this file
-- `notes.md` — design decisions, open questions, research
-- `recall-hook.sh` — archived PreCompact hook (no longer primary path)
+- `notes.md` — design decisions and research
