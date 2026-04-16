@@ -1,7 +1,7 @@
 {
   "name": "engram-cc",
-  "version": "1.0.0",
-  "description": "Session memory for Claude Code. /engram saves a structured record of your session so you can resume cleanly.",
+  "version": "0.3.0",
+  "description": "Session memory for Claude Code. /engram saves, /recall resumes.",
   "keywords": ["claude", "claude-code", "ai", "session", "memory"],
   "homepage": "https://github.com/obivanste/engram",
   "repository": {
@@ -15,6 +15,7 @@
   "files": [
     "bin/",
     "engram.md",
+    "recall.md",
     "install.sh",
     "examples/"
   ],
