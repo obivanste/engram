@@ -1,5 +1,6 @@
 ---
-description: TotalReClaude — export session to project folder for safe resumption
+description: TotalReClaude — save session to .recall/ for safe resumption
+argument-hint: "[folder-name] (optional — defaults to timestamp)"
 ---
 
 # TotalReClaude — /recall
@@ -14,27 +15,28 @@ description: TotalReClaude — export session to project folder for safe resumpt
 
 ## Instructions
 
-### 1 — Determine the project name
+### 1 — Determine the project root
 
-Use this priority order to get the project root path:
+Use this priority order:
 1. Git root (from above) — most reliable
-2. Nearest directory containing `CLAUDE.md` (from above)
+2. Nearest directory containing `CLAUDE.md` (from above), excluding `~/.claude/`
 3. Working directory as fallback
 
-The **project name** is the basename of that path (e.g. `/Users/macbookpro/Desktop/Development/totalreclaude` → `totalreclaude`).
+### 2 — Determine the folder name
 
-### 2 — Create the output folder
+- If an argument was passed to `/recall` (e.g. `/recall auth-refactor`), use that as the folder name
+- Otherwise, use the timestamp from above
 
-Save location is always:
+Create the output folder at:
 ```
-~/Desktop/TotalReClaude/<project-name>/
+<project-root>/.recall/<folder-name>/
 ```
 
-Create it if it doesn't exist.
+`.recall/` is gitignored — it lives in the repo but is never committed.
 
 ### 3 — Write the recall file
 
-Filename: `<YYYY-MM-DD-HHMMSS>.md` (use the timestamp from invocation context above).
+Filename: `<folder-name>.md`
 
 Four sections, in this order:
 
@@ -42,19 +44,19 @@ Four sections, in this order:
 The goal and context. What problem was being solved, what was being built, and why. One short paragraph — enough for someone coming in cold to understand the mission.
 
 **2. What was done**
-Everything that happened: decisions made and why, files created or changed, commands run, errors hit and how they were fixed. This is the full record — don't skim it.
+Everything that happened: decisions made and why, files created or changed, commands run, errors hit and how they were fixed. Full record — don't skim it.
 
 **3. Where we recalled**
-The exact state at the moment `/recall` was triggered. What's complete, what's in progress, what's half-finished. If someone picked this up right now, what would they find?
+The exact state at the moment `/recall` was triggered. What's complete, what's in progress, what's half-finished.
 
 **4. Next steps**
-What to do from here, in priority order. Be specific — not "continue the work" but "do X, then Y, watch out for Z."
+What to do from here, in priority order. Specific — not "continue the work" but "do X, then Y, watch out for Z."
 
 ### 4 — Confirm
 
 Print:
 ```
-[TotalReClaude] saved → ~/Desktop/TotalReClaude/<project-name>/<timestamp>.md
+[TotalReClaude] saved → .recall/<folder-name>/<folder-name>.md
 ```
 
 ---
@@ -64,9 +66,8 @@ Print:
 ```markdown
 # TotalReClaude — <YYYY-MM-DD HH:MM>
 
-**Project:** <project-name>
-**Path:** <project-root>
-**Recalled at:** <timestamp>
+**Project:** <project-root>
+**Recalled at:** <folder-name>
 
 ## What this session was about
 <one paragraph — goal, context, why>

@@ -1,14 +1,14 @@
 #!/bin/bash
 # TotalReClaude — installer
-# Installs the /recall command into Claude Code and creates the Desktop hub folder.
+# Installs the /recall command into Claude Code.
+# Recall files are saved to .recall/ inside each project repo (gitignored).
 
 set -euo pipefail
 
 COMMANDS_DIR="$HOME/.claude/commands"
-HUB_DIR="$HOME/Desktop/TotalReClaude"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# ── colors ──────────────────────────────────────────────────────────────────
+# ── colors ───────────────────────────────────────────────────────────────────
 GREEN='\033[0;32m'
 DIM='\033[2m'
 RESET='\033[0m'
@@ -36,15 +36,9 @@ fi
 cp "$SCRIPT_DIR/recall.md" "$COMMANDS_DIR/recall.md"
 ok "Installed /recall → $COMMANDS_DIR/recall.md"
 
-# ── 2. Desktop hub ───────────────────────────────────────────────────────────
-if [ ! -d "$HUB_DIR" ]; then
-  mkdir -p "$HUB_DIR"
-  ok "Created recall hub → $HUB_DIR"
-else
-  ok "Recall hub already exists → $HUB_DIR"
-fi
-
 # ── done ─────────────────────────────────────────────────────────────────────
 echo ""
-echo "All done. Type /recall in any Claude Code session to capture and save your session."
+echo "All done. Type /recall in any Claude Code session to save your session."
+dim "  Recall files are saved to .recall/ inside your project (gitignored)."
+dim "  Use /recall <name> to create a named folder instead of a timestamp."
 echo ""
