@@ -9,17 +9,17 @@ argument-hint: "[folder-name] (optional — load a specific engram instead of th
 - Git root: !`git rev-parse --show-toplevel 2>/dev/null || true`
 - Working directory: !`pwd`
 - Engram config: !`cat ~/.engramrc 2>/dev/null || true`
-- Engrams in project: !`ls -1t "$(git rev-parse --show-toplevel 2>/dev/null || echo ".")/.engram/" 2>/dev/null | head -20 || true`
-- Engrams in ~/Documents/.engram/: !`ls -1t ~/Documents/.engram/ 2>/dev/null | head -20 || true`
+- Engrams in project: !`ls -1t "$(git rev-parse --show-toplevel 2>/dev/null || echo ".")/engram/" 2>/dev/null | head -20 || true`
+- Engrams in ~/Documents/engram/: !`ls -1t ~/Documents/engram/ 2>/dev/null | head -20 || true`
 
 ## Instructions
 
 ### 1 — Determine where engrams are stored
 
 Use the same priority order as `/engram`:
-1. `<git-root>/.engram/` — preferred, lives with the code
+1. `<git-root>/engram/` — preferred, lives with the code
 2. `DEFAULT_DIR` from `~/.engramrc` if present
-3. `~/Documents/.engram/` — persistent fallback
+3. `~/Documents/engram/` — persistent fallback
 
 ### 2 — Find the engram to load
 

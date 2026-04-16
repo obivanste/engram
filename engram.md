@@ -22,7 +22,7 @@ Use this priority order:
 1. Git root (from above) — most reliable
 2. Nearest directory containing `CLAUDE.md` (from above), excluding `~/.claude/`
 3. `DEFAULT_DIR` from `~/.engramrc` if present (e.g. `DEFAULT_DIR=/Users/you/Documents/engrams`)
-4. `~/Documents/.engram/` — persistent fallback, never disappears on reboot
+4. `~/Documents/engram/` — persistent fallback, never disappears on reboot
 
 Never use `/private/tmp` or any other temp directory as the save location.
 
@@ -41,12 +41,12 @@ If an argument was passed to `/engram` (e.g. `/engram before-merge`), use that a
 
 Create the output folder at:
 ```
-<project-root>/.engram/<folder-name>/
+<project-root>/engram/<folder-name>/
 ```
 
-If saving to the `~/Documents/.engram/` fallback or a custom `DEFAULT_DIR`, create the folder directly inside that directory (no extra `.engram/` nesting needed).
+If saving to the `~/Documents/engram/` fallback or a custom `DEFAULT_DIR`, create the folder directly inside that directory (no extra `engram/` nesting needed).
 
-`.engram/` is gitignored when inside a project — it lives with the code but is never committed.
+`engram/` is gitignored when inside a project — it lives with the code but is never committed.
 
 ### 3 — Write the engram file
 

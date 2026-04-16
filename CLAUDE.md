@@ -2,24 +2,24 @@
 
 Session memory for Claude Code. Two commands: `/engram` to save, `/recall` to resume.
 
-Saves the current session to a structured `.md` file inside `.engram/` in the project root — gitignored, lives with the code. On the next session, `/recall` loads it back into context.
+Saves the current session to a structured `.md` file inside `engram/` in the project root — gitignored, lives with the code. On the next session, `/recall` loads it back into context.
 
 ## Flow
 
 ```
 /engram
-  → .engram/<slug-timestamp>/<slug-timestamp>.md
-  → [Engram] saved → .engram/...
+  → engram/<slug-timestamp>/<slug-timestamp>.md
+  → [Engram] saved → engram/...
 
 /recall
-  → reads latest .engram/ file
-  → [Recall] loaded → .engram/...
+  → reads latest engram/ file
+  → [Recall] loaded → engram/...
 ```
 
 Named saves:
 ```
 /engram auth-refactor
-  → .engram/auth-refactor-<timestamp>/auth-refactor-<timestamp>.md
+  → engram/auth-refactor-<timestamp>/auth-refactor-<timestamp>.md
 
 /recall auth-refactor
   → loads the matching engram
@@ -29,7 +29,7 @@ Named saves:
 
 ```
 <project-root>/
-  .engram/
+  engram/
     2026-04-16-120013/
       2026-04-16-120013.md
     auth-refactor/
