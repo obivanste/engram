@@ -1,5 +1,5 @@
 ---
-description: Engram — save session to .engram/ for safe resumption
+description: Engram — save session to engram/ for safe resumption
 argument-hint: "[folder-name] (optional — defaults to timestamp)"
 ---
 
@@ -66,7 +66,21 @@ The exact state at the moment `/engram` was triggered. What's complete, what's i
 **4. Next steps**
 What to do from here, in priority order. Specific — not "continue the work" but "do X, then Y, watch out for Z."
 
-### 4 — Confirm
+### 4 — Ask where to save
+
+After writing the file, show the user where it was saved and ask if they want to copy it to a different folder:
+
+```
+[Engram] saved → <full-path-to-folder>/<folder-name>.md
+
+Save a copy to a different folder? Enter a path or press Enter to skip.
+```
+
+Wait for the user's response:
+- If they enter a path: copy the file to `<their-path>/<folder-name>.md` (create the directory if it doesn't exist), then confirm: `[Engram] also copied → <their-path>/<folder-name>.md`
+- If they press Enter or respond with nothing: skip silently, no additional output
+
+### 5 — Confirm
 
 Print:
 ```
