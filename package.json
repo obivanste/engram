@@ -1,6 +1,6 @@
 {
   "name": "engram-cc",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Session memory for Claude Code. /engram saves, /recall resumes.",
   "keywords": ["claude", "claude-code", "ai", "session", "memory"],
   "homepage": "https://github.com/obivanste/engram",
