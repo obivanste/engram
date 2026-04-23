@@ -13,6 +13,7 @@ argument-hint: "[folder-name] (optional — defaults to timestamp)"
 - Recent commits: !`git log --oneline -5 2>/dev/null || true`
 - CLAUDE.md locations: !`find . -name "CLAUDE.md" -maxdepth 4 2>/dev/null || true`
 - Engram config: !`cat ~/.engramrc 2>/dev/null || true`
+- Default engram dir exists: !`test -d ~/Documents/engram && echo "yes" || echo "no"`
 
 ## Instructions
 
@@ -23,6 +24,8 @@ Use this priority order:
 2. Nearest directory containing `CLAUDE.md` (from above), excluding `~/.claude/`
 3. `DEFAULT_DIR` from `~/.engramrc` if present (e.g. `DEFAULT_DIR=/Users/you/Documents/engrams`)
 4. `~/Documents/engram/` — persistent fallback, never disappears on reboot
+
+For the fallback (priority 4): check whether `~/Documents/engram/` already exists (from the context above). If it does not exist, create it with `mkdir -p ~/Documents/engram` before saving. Never create `.engram` (with a leading dot) — always use `engram` without a dot prefix.
 
 Never use `/private/tmp` or any other temp directory as the save location.
 
